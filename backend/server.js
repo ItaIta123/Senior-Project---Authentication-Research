@@ -1,7 +1,7 @@
 require("dotenv").config(); // config() attached all env vars to the process object
 const express = require("express");
 const mongoose = require("mongoose");
-const workoutRoutes = require("./routes/workouts");
+const workoutRoutes = require("./routes/workoutsRoutes");
 
 // express app
 const app = express();
