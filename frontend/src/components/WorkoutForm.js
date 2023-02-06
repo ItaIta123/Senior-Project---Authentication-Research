@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useWorkoutContext } from "../hooks/useWorkoutContext";
 
 export const WorkoutForm = () => {
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
   const [error, setError] = useState(null);
+
+  const { dispatch } = useWorkoutContext();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault(); // prevent page refresh
@@ -28,6 +31,8 @@ export const WorkoutForm = () => {
       setTitle("");
       setLoad("");
       setReps("");
+
+      dispatch({ type: "CREATE_WORKOUT", payload: json });
       console.log(`New Workout Added`, json);
     }
   };
