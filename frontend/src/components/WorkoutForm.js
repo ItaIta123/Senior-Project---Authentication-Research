@@ -6,6 +6,7 @@ export const WorkoutForm = () => {
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const { dispatch } = useWorkoutContext();
 
@@ -26,8 +27,10 @@ export const WorkoutForm = () => {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields);
     } else {
       setError(null);
+      setEmptyFields([]);
       setTitle("");
       setLoad("");
       setReps("");
@@ -46,6 +49,7 @@ export const WorkoutForm = () => {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        className={emptyFields.includes("title") ? "error" : ""}
       />
 
       <label>Load (Kg):</label>
@@ -53,6 +57,7 @@ export const WorkoutForm = () => {
         type="number"
         value={load}
         onChange={(e) => setLoad(e.target.value)}
+        className={emptyFields.includes("load") ? "error" : ""}
       />
 
       <label>Number of Reps:</label>
@@ -60,6 +65,7 @@ export const WorkoutForm = () => {
         type="number"
         value={reps}
         onChange={(e) => setReps(e.target.value)}
+        className={emptyFields.includes("reps") ? "error" : ""}
       />
       <button>Add Workout</button>
       {error && <div className="error">{error}</div>}
