@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 
 // GET all workout
 const getAllWorkouts = async (req, res) => {
-  const workouts = await Workout.find({}).sort({ createdAt: -1 }); // get all workouts docs by descending order
+  const { authorization } = req.headers; // DELETE LATER
+  console.log(authorization);
+  const user_id = authorization; // DELETE LATER
+  const workouts = await Workout.find({ user_id }).sort({ createdAt: -1 }); // get all workouts docs by descending order
 
   res.status(200).json(workouts);
 };
