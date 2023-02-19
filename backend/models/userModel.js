@@ -44,7 +44,6 @@ userSchema.statics.signup = async function (email, password) {
   const hash = await bcrypt.hash(password, salt);
 
   // Need to create a JWT
-
   const user = await this.create({ email: email, password: hash });
 
   return user;

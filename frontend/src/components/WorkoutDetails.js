@@ -7,6 +7,8 @@ export const WorkoutDetails = ({ workout }) => {
 
   const handleClickDelete = async (e) => {
     const response = await fetch(`/api/workouts/${workout._id}`, {
+      headers: { Authorization: `Bearer ` }, // NEED TO CHANGE TO TOKEN LATER!!!!!!!!
+
       method: "DELETE",
     });
 
