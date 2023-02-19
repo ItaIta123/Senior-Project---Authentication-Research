@@ -34,7 +34,7 @@ export const Login = () => {
       />
 
       <button disabled={isLoading}>Log In</button>
-      {error && <div className="error">{error.err}</div>}
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };

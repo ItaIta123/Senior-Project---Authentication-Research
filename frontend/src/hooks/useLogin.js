@@ -22,6 +22,7 @@ export const useLogin = () => {
 
     if (!response.ok) {
       setIsLoading(false);
+      console.log("error", data);
       setError(data.err);
     }
 
