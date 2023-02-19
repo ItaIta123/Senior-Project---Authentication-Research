@@ -14,6 +14,7 @@ export const NavBar = () => {
           <h1>Workout Buddy</h1>
         </Link>
         <nav>
+          {user.email}
           {user && (
             <div>
               <button onClick={() => logout()}>Log out</button>
