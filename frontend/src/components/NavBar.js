@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export const NavBar = () => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   return (
     <header>
@@ -17,7 +18,7 @@ export const NavBar = () => {
           {user && user.email}
           {user && (
             <div>
-              <button onClick={() => logout()}>Log out</button>
+              <button onClick={() => (logout(), navigate("/"))}>Log out</button>
             </div>
           )}
           {!user && (

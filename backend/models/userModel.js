@@ -33,7 +33,7 @@ userSchema.statics.signup = async function (email, password) {
   }
 
   // check if user already exists
-  const emailTaken = await this.findOne({ email: email });
+  const emailTaken = await this.findOne({ email });
 
   if (emailTaken) {
     throw new Error("Email already in use");
@@ -43,7 +43,6 @@ userSchema.statics.signup = async function (email, password) {
   const salt = await bcrypt.genSalt(11);
   const hash = await bcrypt.hash(password, salt);
 
-  // Need to create a JWT
   const user = await this.create({ email: email, password: hash });
 
   return user;
