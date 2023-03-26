@@ -15,6 +15,10 @@ export const WorkoutForm = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault(); // prevent page refresh
 
+    if (!user) {
+      setError("You must be login");
+      return;
+    }
     const workout = { title, load, reps, user };
 
     const response = await fetch("/api/workouts", {
@@ -22,7 +26,7 @@ export const WorkoutForm = () => {
       body: JSON.stringify(workout),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer `, // NEED TO CHANGE TO TOKEN LATER!!!!!!!!
+        Authorization: `Bearer ${user.token}`,
       },
     });
 

@@ -11,7 +11,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchWorkouts = async () => {
       const response = await fetch("/api/workouts", {
-        headers: { Authorization: user.user._id }, // NEED TO CHANGE TO TOKEN LATER!!!!!!!!
+        headers: { Authorization: `Bearer ${user.token}` },
       });
       const workoutsJson = await response.json();
 
@@ -20,8 +20,10 @@ export const Home = () => {
       }
     };
 
-    fetchWorkouts();
-  }, [dispatch, user]); // DELETE user LATER!!
+    if (user) {
+      fetchWorkouts();
+    }
+  }, [dispatch, user]);
   return (
     <div className="home">
       <div className="workouts">

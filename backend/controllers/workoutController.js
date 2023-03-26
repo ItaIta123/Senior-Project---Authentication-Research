@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 
 // GET all workout
 const getAllWorkouts = async (req, res) => {
-  const { authorization } = req.headers; // DELETE LATER
-  console.log(authorization);
-  const user_id = authorization; // DELETE LATER
+  const user_id = req.user._id;
   const workouts = await Workout.find({ user_id }).sort({ createdAt: -1 }); // get all workouts docs by descending order
 
   res.status(200).json(workouts);
@@ -34,7 +32,7 @@ const getAWorkout = async (req, res) => {
 const createWorkout = async (req, res) => {
   const { title, load, reps, user } = req.body;
 
-  const user_id = user.user._id;
+  const user_id = req.user._id;
 
   let emptyFields = [];
 

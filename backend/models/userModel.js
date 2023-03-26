@@ -70,8 +70,14 @@ userSchema.statics.login = async function (email, password) {
     throw new Error("Email or password do not match");
   }
 
+  const match = await bcrypt.compare(password, user.password);
+
+  if (!match) {
+    throw new Error("Email or password do not match");
+  }
+
   return user;
 };
 
-// model automatically creates a collection of "Workouts" and let us interact with this collection
+// model automatically creates a collection of "Users" and let us interact with this collection
 module.exports = mongoose.model("User", userSchema);
