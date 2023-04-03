@@ -7,11 +7,12 @@ import { useAuthContext } from "../hooks/useAuthContext";
 export const Home = () => {
   const { workouts, dispatch } = useWorkoutContext();
   const { user } = useAuthContext();
+  console.log(user);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
       const response = await fetch("/api/workouts", {
-        headers: { Authorization: user.user._id }, // NEED TO CHANGE TO TOKEN LATER!!!!!!!!
+        headers: { Authorization: user.user.id }, // NEED TO CHANGE TO TOKEN LATER!!!!!!!!
       });
       const workoutsJson = await response.json();
 
